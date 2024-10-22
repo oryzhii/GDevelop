@@ -532,13 +532,7 @@ namespace gdjs {
      * the resource (this can be for example a token needed to access the resource).
      */
     getFullUrl(url: string) {
-      try {
-        new URL(url)
-      } catch (error) {
-        if (error instanceof TypeError) {
-          url = globalThis.location.href + url
-        }
-      }
+      url = PIXI.utils.path.toAbsolute(url);
       const { gdevelopResourceToken } = this._runtimeGame._options;
 
       if (!gdevelopResourceToken) return url;
